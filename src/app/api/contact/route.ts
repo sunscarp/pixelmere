@@ -28,6 +28,7 @@ export async function POST(request: Request) {
   const pass = process.env.SMTP_PASS;
   const from = process.env.SMTP_FROM ?? user;
   const to = process.env.SMTP_TO ?? user;
+  const bcc = process.env.SMTP_TO_BCC ?? undefined;
 
   if (!host || !user || !pass) {
     return NextResponse.json(
@@ -48,6 +49,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from,
       to,
+      bcc,
       replyTo: `${name} <${email}>`,
       subject: `New enquiry from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`,

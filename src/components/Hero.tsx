@@ -38,6 +38,9 @@ export default function Hero() {
           <p className="max-w-xl text-xl leading-relaxed text-ink-soft sm:text-2xl">
             We build websites that work as hard as you do.
           </p>
+          <p className="text-lg font-bold text-heading sm:text-xl">
+            Websites starting from Rs. 5,000 — email us for a final quote.
+          </p>
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <a
               href="#contact"

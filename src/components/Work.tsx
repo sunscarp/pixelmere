@@ -35,7 +35,7 @@ const projects: Project[] = [
     url: "https://otakuballerz.shop",
     description:
       "Streetwear store for anime and football fans — oversized tees, hoodies, and COD checkout.",
-    tags: ["Shopify", "DTC"],
+    tags: ["Next.js", "DTC"],
     image: "/ob.png",
   },
   {
@@ -44,7 +44,7 @@ const projects: Project[] = [
     url: "https://kriastore.in",
     description:
       "Artisanal jewellery and home-decor store with a category-led catalog and product care guides.",
-    tags: ["Shopify", "E-commerce"],
+    tags: ["Next.js", "E-commerce"],
     image: "/ks.png",
   },
   {
