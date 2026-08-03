@@ -6,12 +6,21 @@ import SectionHeading from "./SectionHeading";
 type FormValues = {
   name: string;
   email: string;
+  phone: string;
   message: string;
+  contactMethod: "email" | "whatsapp";
 };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phonePattern = /^\+?[0-9\s-]{10,15}$/;
 
-const initialValues: FormValues = { name: "", email: "", message: "" };
+const initialValues: FormValues = {
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+  contactMethod: "email",
+};
 
 const fieldClass =
   "w-full rounded-lg border border-line bg-card px-4 py-3 text-ink placeholder:text-ink-soft/70 transition-colors focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/20";
@@ -26,7 +35,13 @@ export default function Contact() {
   const validate = (formValues: FormValues): Partial<FormValues> => {
     const next: Partial<FormValues> = {};
     if (!formValues.name.trim()) next.name = "Please enter your name.";
-    if (!formValues.email.trim()) {
+    if (formValues.contactMethod === "whatsapp") {
+      if (!formValues.phone.trim()) {
+        next.phone = "Please enter your WhatsApp number.";
+      } else if (!phonePattern.test(formValues.phone.trim())) {
+        next.phone = "Please enter a valid phone number.";
+      }
+    } else if (!formValues.email.trim()) {
       next.email = "Please enter your email.";
     } else if (!emailPattern.test(formValues.email.trim())) {
       next.email = "Please enter a valid email address.";
@@ -43,6 +58,11 @@ export default function Contact() {
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
+  };
+
+  const selectMethod = (method: FormValues["contactMethod"]) => {
+    setValues((prev) => ({ ...prev, contactMethod: method }));
+    setErrors((prev) => ({ ...prev, email: undefined, phone: undefined }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -166,7 +186,11 @@ export default function Contact() {
                 </h3>
                 <p className="mt-2 text-ink-soft">
                   Thanks, {values.name.split(" ")[0]} — your message is on its
-                  way. We&apos;ll be in touch within one business day.
+                  way. We&apos;ll{" "}
+                  {values.contactMethod === "whatsapp"
+                    ? "WhatsApp you"
+                    : "email you"}{" "}
+                  within one business day.
                 </p>
                 <button
                   type="button"
@@ -208,28 +232,90 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="mb-1.5 block text-sm font-medium text-heading"
+                  <span className="mb-1.5 block text-sm font-medium text-heading">
+                    Preferred contact method
+                  </span>
+                  <div
+                    role="group"
+                    aria-label="Preferred contact method"
+                    className="flex gap-2"
                   >
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={values.email}
-                    onChange={(event) => handleChange("email", event)}
-                    placeholder="jane@company.com"
-                    aria-invalid={Boolean(errors.email)}
-                    className={fieldClass}
-                  />
-                  {errors.email ? (
-                    <p role="alert" className="mt-1.5 text-sm text-red-600">
-                      {errors.email}
-                    </p>
-                  ) : null}
+                    <button
+                      type="button"
+                      onClick={() => selectMethod("email")}
+                      aria-pressed={values.contactMethod === "email"}
+                      className={`flex-1 rounded-lg px-4 py-3 text-sm font-medium transition-colors sm:flex-none ${
+                        values.contactMethod === "email"
+                          ? "bg-teal text-cream"
+                          : "border border-line bg-card text-ink-soft hover:border-teal/50 hover:text-teal"
+                      }`}
+                    >
+                      Email
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => selectMethod("whatsapp")}
+                      aria-pressed={values.contactMethod === "whatsapp"}
+                      className={`flex-1 rounded-lg px-4 py-3 text-sm font-medium transition-colors sm:flex-none ${
+                        values.contactMethod === "whatsapp"
+                          ? "bg-teal text-cream"
+                          : "border border-line bg-card text-ink-soft hover:border-teal/50 hover:text-teal"
+                      }`}
+                    >
+                      WhatsApp
+                    </button>
+                  </div>
                 </div>
+
+                {values.contactMethod === "email" ? (
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="mb-1.5 block text-sm font-medium text-heading"
+                    >
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={values.email}
+                      onChange={(event) => handleChange("email", event)}
+                      placeholder="jane@company.com"
+                      aria-invalid={Boolean(errors.email)}
+                      className={fieldClass}
+                    />
+                    {errors.email ? (
+                      <p role="alert" className="mt-1.5 text-sm text-red-600">
+                        {errors.email}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : (
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="mb-1.5 block text-sm font-medium text-heading"
+                    >
+                      WhatsApp number
+                    </label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={values.phone}
+                      onChange={(event) => handleChange("phone", event)}
+                      placeholder="+91 98765 43210"
+                      aria-invalid={Boolean(errors.phone)}
+                      className={fieldClass}
+                    />
+                    {errors.phone ? (
+                      <p role="alert" className="mt-1.5 text-sm text-red-600">
+                        {errors.phone}
+                      </p>
+                    ) : null}
+                  </div>
+                )}
 
                 <div>
                   <label
