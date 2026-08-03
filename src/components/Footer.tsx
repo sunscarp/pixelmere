@@ -45,7 +45,7 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-3 border-t border-cream/10 pt-8 text-sm text-cream/60 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Pixelmere. All rights reserved.</p>
-          <p>
+          <p className="flex flex-wrap items-center gap-x-2">
             <a
               href="tel:+918007524042"
               className="transition-colors hover:text-teal"
@@ -58,6 +58,31 @@ export default function Footer() {
               className="transition-colors hover:text-teal"
             >
               hello@pixelmere.site
+            </a>
+            <span className="mx-2 text-cream/40">·</span>
+            <a
+              href="https://www.instagram.com/pixelmere.site/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pixelmere on Instagram (opens in a new tab)"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-teal"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+              @pixelmere.site
             </a>
           </p>
         </div>

@@ -117,6 +117,19 @@ export default function Contact() {
                   Working with clients in India and Europe.
                 </p>
               </li>
+              <li>
+                <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+                  Instagram
+                </p>
+                <a
+                  href="https://www.instagram.com/pixelmere.site/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-block text-lg font-medium text-heading transition-colors hover:text-teal"
+                >
+                  @pixelmere.site
+                </a>
+              </li>
             </ul>
           </div>
 
