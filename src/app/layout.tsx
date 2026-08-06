@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 const geist = Geist({
   variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
 });
 
@@ -37,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${geist.variable} antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${geist.variable} ${instrumentSerif.variable} antialiased`}>
       <body className="min-h-screen bg-page text-ink">
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         {children}

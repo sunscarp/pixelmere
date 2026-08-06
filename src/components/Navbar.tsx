@@ -40,11 +40,19 @@ function toggleTheme() {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
+  const [scrolled, setScrolled] = useState(false);
   const theme = useSyncExternalStore(
     subscribeTheme,
     readTheme,
     (): Theme => "light",
   );
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const sections = links
@@ -67,7 +75,11 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-page/90 backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 border-b bg-page/80 backdrop-blur-xl transition-shadow duration-300 ${
+        scrolled ? "border-line shadow-lg shadow-navy/5" : "border-line/60"
+      }`}
+    >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <a href="#top" className="text-heading transition-opacity hover:opacity-80">
           <Logo />
@@ -128,7 +140,7 @@ export default function Navbar() {
 
           <a
             href="#contact"
-            className="hidden rounded-lg bg-teal px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-teal/90 md:inline-flex"
+            className="hidden rounded-lg bg-linear-to-r from-teal to-teal-bright px-5 py-2.5 text-sm font-semibold text-cream shadow-md shadow-teal/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal/30 md:inline-flex"
           >
             Start a Project
           </a>
@@ -179,7 +191,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-lg bg-teal px-3 py-2.5 text-center text-sm font-medium text-cream transition-colors hover:bg-teal/90"
+              className="mt-2 rounded-lg bg-linear-to-r from-teal to-teal-bright px-3 py-2.5 text-center text-sm font-semibold text-cream shadow-md shadow-teal/20 transition-colors hover:opacity-90"
             >
               Start a Project
             </a>

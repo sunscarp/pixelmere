@@ -10,7 +10,15 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer className="bg-footer text-cream">
+    <footer className="relative overflow-hidden bg-footer text-cream">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-20 left-1/2 h-64 w-[48rem] -translate-x-1/2 rounded-full bg-teal/10 blur-3xl"
+      />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-teal/60 to-transparent"
+      />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <div className="grid gap-12 md:grid-cols-3 md:items-start">
           <div className="md:col-span-2">
@@ -87,6 +95,12 @@ export default function Footer() {
           </p>
         </div>
       </div>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-8 left-0 select-none whitespace-nowrap text-[19vw] font-semibold leading-none tracking-tight text-cream/[0.04]"
+      >
+        pixelmere
+      </span>
     </footer>
   );
 }

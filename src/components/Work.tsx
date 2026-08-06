@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 type Project = {
@@ -69,14 +70,16 @@ export default function Work() {
   return (
     <section id="work" className="scroll-mt-24 bg-surface py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="Work"
-          title="Recent projects"
-          description="A few of the sites we've designed and shipped recently — each one live, in production, and earning its keep."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Work"
+            title="Recent projects"
+            description="A few of the sites we've designed and shipped recently — each one live, in production, and earning its keep."
+          />
+        </Reveal>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => {
+          {projects.map((project, index) => {
             const card = (
               <>
                 <div className="relative aspect-[16/10] overflow-hidden bg-fill">
@@ -85,8 +88,30 @@ export default function Work() {
                     alt={`${project.title} website preview`}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-linear-to-t from-navy/70 via-navy/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+                  {project.url ? (
+                    <span className="absolute bottom-4 right-4 inline-flex translate-y-2 items-center gap-1.5 rounded-full bg-cream/95 px-4 py-2 text-sm font-semibold text-navy opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                      Visit site
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M7 17L17 7M9 7h8v8" />
+                      </svg>
+                    </span>
+                  ) : null}
                 </div>
                 <div className="p-6 sm:p-7">
                   <div className="flex items-center justify-between gap-4">
@@ -124,7 +149,7 @@ export default function Work() {
                     {project.tags.map((tag) => (
                       <li
                         key={tag}
-                        className="rounded-full bg-fill px-3 py-1 text-xs font-medium text-heading"
+                        className="rounded-full bg-fill px-3 py-1 text-xs font-medium text-heading transition-colors group-hover:bg-teal/10 group-hover:text-teal"
                       >
                         {tag}
                       </li>
@@ -134,24 +159,36 @@ export default function Work() {
               </>
             );
 
+            const cardClass =
+              "group relative overflow-hidden rounded-2xl border border-line bg-card-soft transition duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-xl hover:shadow-teal/10 dark:hover:shadow-black/40";
+
+            const accent = (
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-6 top-0 h-px bg-linear-to-r from-transparent via-teal/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              />
+            );
+
             return project.url ? (
-              <a
-                key={project.title}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Visit ${project.title} (opens in a new tab)`}
-                className="group overflow-hidden rounded-2xl border border-line bg-card-soft transition duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-lg hover:shadow-navy/5 dark:hover:shadow-black/40"
-              >
-                {card}
-              </a>
+              <Reveal key={project.title} delay={(index % 3) * 80}>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${project.title} (opens in a new tab)`}
+                  className={cardClass}
+                >
+                  {accent}
+                  {card}
+                </a>
+              </Reveal>
             ) : (
-              <article
-                key={project.title}
-                className="group overflow-hidden rounded-2xl border border-line bg-card-soft transition duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-lg hover:shadow-navy/5 dark:hover:shadow-black/40"
-              >
-                {card}
-              </article>
+              <Reveal key={project.title} delay={(index % 3) * 80}>
+                <article className={cardClass}>
+                  {accent}
+                  {card}
+                </article>
+              </Reveal>
             );
           })}
         </div>

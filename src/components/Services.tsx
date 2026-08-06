@@ -1,3 +1,4 @@
+import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 type Service = {
@@ -103,64 +104,85 @@ export default function Services() {
   return (
     <section id="services" className="scroll-mt-24 py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="Services"
-          title="Everything your website needs"
-          description="From first wireframe to long-term care, we handle the whole lifecycle of your site — one team, no handoffs."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Services"
+            title="Everything your website needs"
+            description="From first wireframe to long-term care, we handle the whole lifecycle of your site — one team, no handoffs."
+          />
+        </Reveal>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className="group rounded-2xl border border-line bg-card p-7 transition duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-lg hover:shadow-navy/5 dark:hover:shadow-black/40"
-            >
-              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-teal/10 text-teal transition-colors duration-300 group-hover:bg-teal group-hover:text-cream dark:bg-teal/15">
-                {service.icon}
+          {services.map((service, index) => (
+            <Reveal key={service.title} delay={index * 80}>
+              <div className="group relative h-full overflow-hidden rounded-2xl border border-line bg-card p-7 transition duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-xl hover:shadow-teal/10 dark:hover:shadow-black/40">
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-6 top-0 h-px bg-linear-to-r from-transparent via-teal/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-2 top-3 text-6xl font-semibold text-heading/5 transition-colors duration-300 group-hover:text-teal/10"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-teal/15 to-teal-bright/5 text-teal ring-1 ring-teal/20 transition-all duration-300 group-hover:from-teal group-hover:to-teal-bright group-hover:text-cream group-hover:shadow-lg group-hover:shadow-teal/25">
+                  {service.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-heading">{service.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                  {service.description}
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-heading">{service.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-                {service.description}
-              </p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-8 rounded-2xl border border-teal/20 bg-teal/10 p-8 sm:p-10 dark:border-teal/30 dark:bg-teal/15">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold text-heading sm:text-2xl">
-                Custom software for European clients
-              </h3>
-              <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft">
-                Beyond marketing sites, we build the internal software that keeps
-                businesses running — order systems, portals, and automation tools used
-                daily by teams across Europe.
-              </p>
-            </div>
-            <ul className="grid flex-1 gap-3">
-              {enterprisePoints.map((point) => (
-                <li key={point} className="flex items-start gap-3 text-sm text-ink/85">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    className="mt-0.5 shrink-0 text-teal"
+        <Reveal delay={120}>
+          <div className="relative mt-8 overflow-hidden rounded-2xl border border-teal/20 bg-linear-to-br from-teal/10 to-teal-bright/5 p-8 sm:p-10 dark:border-teal/30 dark:from-teal/15 dark:to-teal-bright/5">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-teal/15 blur-3xl"
+            />
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-heading sm:text-2xl">
+                  Custom software for European clients
+                </h3>
+                <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft">
+                  Beyond marketing sites, we build the internal software that keeps
+                  businesses running — order systems, portals, and automation tools used
+                  daily by teams across Europe.
+                </p>
+              </div>
+              <ul className="grid flex-1 gap-3">
+                {enterprisePoints.map((point) => (
+                  <li
+                    key={point}
+                    className="flex items-start gap-3 text-sm text-ink/85"
                   >
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                  {point}
-                </li>
-              ))}
-            </ul>
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal">
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                    </span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

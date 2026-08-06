@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 type FormValues = {
@@ -95,70 +96,149 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-24 py-24 sm:py-28">
+    <section id="contact" className="relative scroll-mt-24 overflow-hidden py-24 sm:py-28">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-32 top-24 h-96 w-96 rounded-full bg-teal/10 blur-3xl"
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="Contact"
-          title="Let's build something together"
-          description="Tell us about your project and we'll get back to you within one business day."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Contact"
+            title="Let's build something together"
+            description="Tell us about your project and we'll get back to you within one business day."
+          />
+        </Reveal>
 
         <div className="mt-14 grid gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <ul className="space-y-6">
-              <li>
-                <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
-                  Email
-                </p>
-                <a
-                  href="mailto:hello@pixelmere.site"
-                  className="mt-1 inline-block text-lg font-medium text-heading transition-colors hover:text-teal"
-                >
-                  hello@pixelmere.site
-                </a>
+            <ul className="space-y-7">
+              <li className="flex items-start gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-teal/15 to-teal-bright/5 text-teal ring-1 ring-teal/20">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+                    Email
+                  </p>
+                  <a
+                    href="mailto:hello@pixelmere.site"
+                    className="mt-1 inline-block text-lg font-medium text-heading transition-colors hover:text-teal"
+                  >
+                    hello@pixelmere.site
+                  </a>
+                </div>
               </li>
-              <li>
-                <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
-                  Phone
-                </p>
-                <a
-                  href="tel:+918007524042"
-                  className="mt-1 inline-block text-lg font-medium text-heading transition-colors hover:text-teal"
-                >
-                  +91 80075 24042
-                </a>
+              <li className="flex items-start gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-teal/15 to-teal-bright/5 text-teal ring-1 ring-teal/20">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+                    Phone
+                  </p>
+                  <a
+                    href="tel:+918007524042"
+                    className="mt-1 inline-block text-lg font-medium text-heading transition-colors hover:text-teal"
+                  >
+                    +91 80075 24042
+                  </a>
+                </div>
               </li>
-              <li>
-                <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
-                  Based in
-                </p>
-                <p className="mt-1 text-lg font-medium text-heading">Pune, India</p>
-                <p className="text-sm text-ink-soft">
-                  Working with clients in India and Europe.
-                </p>
+              <li className="flex items-start gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-teal/15 to-teal-bright/5 text-teal ring-1 ring-teal/20">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+                    Based in
+                  </p>
+                  <p className="mt-1 text-lg font-medium text-heading">Pune, India</p>
+                  <p className="text-sm text-ink-soft">
+                    Working with clients in India and Europe.
+                  </p>
+                </div>
               </li>
-              <li>
-                <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
-                  Instagram
-                </p>
-                <a
-                  href="https://www.instagram.com/pixelmere.site/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1 inline-block text-lg font-medium text-heading transition-colors hover:text-teal"
-                >
-                  @pixelmere.site
-                </a>
+              <li className="flex items-start gap-4">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-teal/15 to-teal-bright/5 text-teal ring-1 ring-teal/20">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+                    Instagram
+                  </p>
+                  <a
+                    href="https://www.instagram.com/pixelmere.site/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 inline-block text-lg font-medium text-heading transition-colors hover:text-teal"
+                  >
+                    @pixelmere.site
+                  </a>
+                </div>
               </li>
             </ul>
           </div>
 
-          <form
-            onSubmit={handleSubmit}
-            noValidate
-            className="lg:col-span-3"
-            aria-label="Contact form"
-          >
+          <Reveal delay={100} className="lg:col-span-3">
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="rounded-2xl border border-line bg-card p-6 shadow-xl shadow-navy/5 sm:p-8 dark:shadow-black/40"
+              aria-label="Contact form"
+            >
             {submitted ? (
               <div
                 role="status"
@@ -244,9 +324,9 @@ export default function Contact() {
                       type="button"
                       onClick={() => selectMethod("email")}
                       aria-pressed={values.contactMethod === "email"}
-                      className={`flex-1 rounded-lg px-4 py-3 text-sm font-medium transition-colors sm:flex-none ${
+                      className={`flex-1 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200 sm:flex-none ${
                         values.contactMethod === "email"
-                          ? "bg-teal text-cream"
+                          ? "bg-linear-to-r from-teal to-teal-bright text-cream shadow-md shadow-teal/25"
                           : "border border-line bg-card text-ink-soft hover:border-teal/50 hover:text-teal"
                       }`}
                     >
@@ -256,9 +336,9 @@ export default function Contact() {
                       type="button"
                       onClick={() => selectMethod("whatsapp")}
                       aria-pressed={values.contactMethod === "whatsapp"}
-                      className={`flex-1 rounded-lg px-4 py-3 text-sm font-medium transition-colors sm:flex-none ${
+                      className={`flex-1 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200 sm:flex-none ${
                         values.contactMethod === "whatsapp"
-                          ? "bg-teal text-cream"
+                          ? "bg-linear-to-r from-teal to-teal-bright text-cream shadow-md shadow-teal/25"
                           : "border border-line bg-card text-ink-soft hover:border-teal/50 hover:text-teal"
                       }`}
                     >
@@ -350,14 +430,15 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="w-full rounded-lg bg-teal px-6 py-3.5 text-base font-medium text-cream transition-colors hover:bg-teal/90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                    className="btn-shine w-full rounded-lg bg-linear-to-r from-teal to-teal-bright px-6 py-3.5 text-base font-semibold text-cream shadow-lg shadow-teal/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-teal/30 disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none sm:w-auto"
                   >
                     {sending ? "Sending…" : "Send Message"}
                   </button>
                 </div>
               </div>
             )}
-          </form>
+            </form>
+          </Reveal>
         </div>
       </div>
     </section>

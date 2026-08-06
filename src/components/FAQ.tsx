@@ -1,3 +1,4 @@
+import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 const faqs: { question: string; answer: string }[] = [
@@ -42,41 +43,42 @@ export default function FAQ() {
   return (
     <section id="faq" className="scroll-mt-24 bg-surface py-24 sm:py-28">
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="FAQ"
-          title="Frequently asked questions"
-          description="Everything you need to know about pricing, ownership, and getting started."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="FAQ"
+            title="Frequently asked questions"
+            description="Everything you need to know about pricing, ownership, and getting started."
+          />
+        </Reveal>
 
         <div className="mt-14 space-y-4">
-          {faqs.map((faq) => (
-            <details
-              key={faq.question}
-              className="group rounded-2xl border border-line bg-card px-6 py-5"
-            >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left [&::-webkit-details-marker]:hidden">
-                <h3 className="text-base font-semibold text-heading sm:text-lg">
-                  {faq.question}
-                </h3>
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fill text-heading transition-transform duration-300 group-open:rotate-45">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                </span>
-              </summary>
-              <p className="mt-3 text-sm leading-relaxed text-ink-soft sm:text-base">
-                {faq.answer}
-              </p>
-            </details>
+          {faqs.map((faq, index) => (
+            <Reveal key={faq.question} delay={Math.min(index, 4) * 60}>
+              <details className="group rounded-2xl border border-line bg-card px-6 py-5 transition-colors hover:border-teal/40 open:border-teal/50 open:bg-card-soft">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left [&::-webkit-details-marker]:hidden">
+                  <h3 className="text-base font-semibold text-heading sm:text-lg">
+                    {faq.question}
+                  </h3>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fill text-heading transition-all duration-300 group-open:rotate-45 group-open:bg-teal group-open:text-cream">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft sm:text-base">
+                  {faq.answer}
+                </p>
+              </details>
+            </Reveal>
           ))}
         </div>
       </div>
