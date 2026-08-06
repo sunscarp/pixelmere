@@ -61,9 +61,22 @@ export default function Testimonials() {
                 <blockquote className="flex-1 font-serif text-lg italic leading-relaxed text-ink/85">
                   &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
-                <figcaption className="mt-6 border-t border-line pt-5">
-                  <p className="font-semibold text-heading">{testimonial.name}</p>
-                  <p className="mt-0.5 text-sm text-ink-soft">{testimonial.role}</p>
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-line pt-5">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-teal to-teal-bright text-sm font-bold text-cream"
+                  >
+                    {testimonial.name
+                      .split(" ")
+                      .map((part) => part[0])
+                      .slice(0, 2)
+                      .join("")
+                      .toUpperCase()}
+                  </span>
+                  <div>
+                    <p className="font-semibold text-heading">{testimonial.name}</p>
+                    <p className="mt-0.5 text-sm text-ink-soft">{testimonial.role}</p>
+                  </div>
                 </figcaption>
               </figure>
             </Reveal>
