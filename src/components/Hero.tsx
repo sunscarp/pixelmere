@@ -188,18 +188,20 @@ export default function Hero() {
         </p>
         <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]">
           <div className="flex w-max animate-marquee items-center">
-            {[...brands, ...brands].map((brand, index) => (
-              <span
-                key={`${brand}-${index}`}
-                className="mx-8 flex shrink-0 items-center gap-3 whitespace-nowrap text-lg font-semibold text-ink/50 transition-colors hover:text-teal"
-              >
+            {Array.from({ length: 8 })
+              .flatMap(() => brands)
+              .map((brand, index) => (
                 <span
-                  aria-hidden="true"
-                  className="h-1.5 w-1.5 rounded-full bg-teal/40"
-                />
-                {brand}
-              </span>
-            ))}
+                  key={`${brand}-${index}`}
+                  className="mx-8 flex shrink-0 items-center gap-3 whitespace-nowrap text-lg font-semibold text-ink/50 transition-colors hover:text-teal"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 rounded-full bg-teal/40"
+                  />
+                  {brand}
+                </span>
+              ))}
           </div>
         </div>
       </div>
