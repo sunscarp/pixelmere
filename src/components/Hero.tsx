@@ -186,7 +186,7 @@ export default function Hero() {
         <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.25em] text-ink-soft">
           Trusted by teams at
         </p>
-        <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]">
           <div className="flex w-max animate-marquee items-center">
             {[...brands, ...brands].map((brand, index) => (
               <span
