@@ -66,7 +66,31 @@ const projects: Project[] = [
   },
 ];
 
+const cardClass =
+  "group relative overflow-hidden rounded-2xl border border-line bg-card-soft transition duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-xl hover:shadow-teal/10 dark:hover:shadow-black/40";
+
+function Tags({ tags, dark = false }: { tags: string[]; dark?: boolean }) {
+  return (
+    <ul className="mt-4 flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <li
+          key={tag}
+          className={`rounded-full px-3 py-1 text-xs font-medium transition-colors group-hover:bg-teal/10 group-hover:text-teal ${
+            dark ? "bg-cream/15 text-cream" : "bg-fill text-heading"
+          }`}
+        >
+          {tag}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function Work() {
+  const [featured, ...rest] = projects;
+  const custom = rest[rest.length - 1];
+  const grid = rest.slice(0, rest.length - 1);
+
   return (
     <section id="work" className="scroll-mt-24 bg-surface py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -78,8 +102,64 @@ export default function Work() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => {
+        <div className="mt-14 grid gap-6 lg:grid-cols-2">
+          {featured.url ? (
+            <Reveal className="lg:col-span-2">
+              <a
+                href={featured.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit ${featured.title} (opens in a new tab)`}
+                className={cardClass}
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-fill sm:aspect-[21/10]">
+                  <Image
+                    src={featured.image}
+                    alt={`${featured.title} website preview`}
+                    fill
+                    sizes="(min-width: 1024px) 80vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-linear-to-t from-navy/85 via-navy/25 to-transparent"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-4 p-6 sm:p-8">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.22em] text-teal-bright">
+                        Featured project
+                      </p>
+                      <h3 className="mt-2 text-2xl font-semibold text-cream sm:text-3xl">
+                        {featured.title}
+                      </h3>
+                      <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-cream/85 sm:text-base">
+                        {featured.description}
+                      </p>
+                      <Tags tags={featured.tags} dark />
+                    </div>
+                    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-cream/95 px-4 py-2 text-sm font-semibold text-navy shadow-lg">
+                      Visit site
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M7 17L17 7M9 7h8v8" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </Reveal>
+          ) : null}
+
+          {grid.map((project, index) => {
             const card = (
               <>
                 <div className="relative aspect-[16/10] overflow-hidden bg-fill">
@@ -87,7 +167,7 @@ export default function Work() {
                     src={project.image}
                     alt={`${project.title} website preview`}
                     fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />
                   <div
@@ -136,31 +216,15 @@ export default function Work() {
                           <path d="M7 17L17 7M9 7h8v8" />
                         </svg>
                       </span>
-                    ) : (
-                      <span className="rounded-full bg-fill px-3 py-1 text-xs font-medium text-teal">
-                        Internal
-                      </span>
-                    )}
+                    ) : null}
                   </div>
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">
                     {project.description}
                   </p>
-                  <ul className="mt-4 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <li
-                        key={tag}
-                        className="rounded-full bg-fill px-3 py-1 text-xs font-medium text-heading transition-colors group-hover:bg-teal/10 group-hover:text-teal"
-                      >
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
+                  <Tags tags={project.tags} />
                 </div>
               </>
             );
-
-            const cardClass =
-              "group relative overflow-hidden rounded-2xl border border-line bg-card-soft transition duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-xl hover:shadow-teal/10 dark:hover:shadow-black/40";
 
             const accent = (
               <span
@@ -170,7 +234,7 @@ export default function Work() {
             );
 
             return project.url ? (
-              <Reveal key={project.title} delay={(index % 3) * 80}>
+              <Reveal key={project.title} delay={index * 80}>
                 <a
                   href={project.url}
                   target="_blank"
@@ -183,14 +247,39 @@ export default function Work() {
                 </a>
               </Reveal>
             ) : (
-              <Reveal key={project.title} delay={(index % 3) * 80}>
-                <article className={cardClass}>
-                  {accent}
-                  {card}
-                </article>
+              <Reveal key={project.title} delay={index * 80}>
+                <article className={cardClass}>{accent}{card}</article>
               </Reveal>
             );
           })}
+
+          <Reveal delay={120} className="lg:col-span-2">
+            <article className={cardClass}>
+              <div className="grid sm:grid-cols-2">
+                <div className="relative aspect-[16/10] overflow-hidden bg-fill">
+                  <Image
+                    src={custom.image}
+                    alt="Custom software dashboard illustration"
+                    fill
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-col justify-center p-6 sm:p-8">
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-teal">
+                    Behind the scenes
+                  </p>
+                  <h3 className="mt-2 text-xl font-semibold text-heading sm:text-2xl">
+                    {custom.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                    {custom.description}
+                  </p>
+                  <Tags tags={custom.tags} />
+                </div>
+              </div>
+            </article>
+          </Reveal>
         </div>
       </div>
     </section>

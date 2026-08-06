@@ -58,7 +58,7 @@ export default function Testimonials() {
                     </svg>
                   ))}
                 </div>
-                <blockquote className="flex-1 text-sm leading-relaxed text-ink/85">
+                <blockquote className="flex-1 font-serif text-lg italic leading-relaxed text-ink/85">
                   &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
                 <figcaption className="mt-6 border-t border-line pt-5">

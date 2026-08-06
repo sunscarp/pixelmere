@@ -15,14 +15,28 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Pixelmere — Web Development Agency",
+  metadataBase: new URL("https://pixelmere.site"),
+  title: {
+    default: "Pixelmere — Web Development Agency",
+    template: "%s — Pixelmere",
+  },
   description:
     "Pixelmere is a web development agency building fast, reliable websites that work as hard as you do — design, development, e-commerce, and ongoing support.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Pixelmere — Web Development Agency",
     description: "We build websites that work as hard as you do.",
     type: "website",
     locale: "en_US",
+    url: "https://pixelmere.site",
+    siteName: "Pixelmere",
+  },
+  twitter: {
+    card: "summary",
+    title: "Pixelmere — Web Development Agency",
+    description: "We build websites that work as hard as you do.",
   },
 };
 

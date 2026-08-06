@@ -112,7 +112,7 @@ export default function Services() {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <Reveal key={service.title} delay={index * 80}>
               <div className="group relative h-full overflow-hidden rounded-2xl border border-line bg-card p-7 transition duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-xl hover:shadow-teal/10 dark:hover:shadow-black/40">
@@ -136,53 +136,53 @@ export default function Services() {
               </div>
             </Reveal>
           ))}
-        </div>
 
-        <Reveal delay={120}>
-          <div className="relative mt-8 overflow-hidden rounded-2xl border border-teal/20 bg-linear-to-br from-teal/10 to-teal-bright/5 p-8 sm:p-10 dark:border-teal/30 dark:from-teal/15 dark:to-teal-bright/5">
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-teal/15 blur-3xl"
-            />
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold text-heading sm:text-2xl">
-                  Custom software for European clients
-                </h3>
-                <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft">
-                  Beyond marketing sites, we build the internal software that keeps
-                  businesses running — order systems, portals, and automation tools used
-                  daily by teams across Europe.
-                </p>
+          <Reveal delay={200} className="sm:col-span-2">
+            <div className="relative h-full overflow-hidden rounded-2xl border border-teal/20 bg-linear-to-br from-teal/10 to-teal-bright/5 p-8 sm:p-10 dark:border-teal/30 dark:from-teal/15 dark:to-teal-bright/5">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-teal/15 blur-3xl"
+              />
+              <div className="flex h-full flex-col gap-8 lg:flex-row lg:items-center">
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-heading sm:text-2xl">
+                    Custom software for European clients
+                  </h3>
+                  <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft">
+                    Beyond marketing sites, we build the internal software that
+                    keeps businesses running — order systems, portals, and
+                    automation tools used daily by teams across Europe.
+                  </p>
+                </div>
+                <ul className="grid flex-1 gap-3">
+                  {enterprisePoints.map((point) => (
+                    <li
+                      key={point}
+                      className="flex items-start gap-3 text-sm text-ink/85"
+                    >
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal">
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M20 6L9 17l-5-5" />
+                        </svg>
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="grid flex-1 gap-3">
-                {enterprisePoints.map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-start gap-3 text-sm text-ink/85"
-                  >
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal/15 text-teal">
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                    </span>
-                    {point}
-                  </li>
-                ))}
-              </ul>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

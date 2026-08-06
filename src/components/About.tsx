@@ -16,6 +16,13 @@ const values = [
   },
 ];
 
+const metrics = [
+  { value: "6+", label: "sites shipped" },
+  { value: "1–2 wk", label: "average build" },
+  { value: "100%", label: "client ownership" },
+  { value: "IN + EU", label: "clients served" },
+];
+
 export default function About() {
   return (
     <section id="about" className="scroll-mt-24 bg-surface py-24 sm:py-28">
@@ -61,6 +68,22 @@ export default function About() {
             ))}
           </ul>
         </div>
+
+        <Reveal className="mt-16">
+          <dl className="grid grid-cols-2 gap-8 border-y border-line py-10 sm:grid-cols-4">
+            {metrics.map((metric) => (
+              <div key={metric.label} className="text-center">
+                <dt className="sr-only">{metric.label}</dt>
+                <dd className="text-gradient text-4xl font-semibold tracking-tight sm:text-5xl">
+                  {metric.value}
+                </dd>
+                <p className="mt-2 text-sm font-medium uppercase tracking-widest text-ink-soft">
+                  {metric.label}
+                </p>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
       </div>
     </section>
   );
