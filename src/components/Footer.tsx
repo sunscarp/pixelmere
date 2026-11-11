@@ -55,13 +55,6 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} Pixelmere. All rights reserved.</p>
           <p className="flex flex-wrap items-center gap-x-2">
             <a
-              href="tel:+918007524042"
-              className="transition-colors hover:text-teal"
-            >
-              +91 80075 24042
-            </a>
-            <span className="mx-2 text-cream/40">·</span>
-            <a
               href="mailto:hello@pixelmere.site"
               className="transition-colors hover:text-teal"
             >
